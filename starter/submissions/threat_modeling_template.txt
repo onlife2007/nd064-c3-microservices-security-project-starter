@@ -1,0 +1,11 @@
+Docker Threat Modeling
+Given Docker's system components and the STRIDE framework, identify five potential threats that may arise.
+- Spoofing of network traffic: Docker supports the addition and removal of capabilities. You should remove all capabilities not required for the correct function of the container. Specifically, in the default capability set provided by Docker, the new_raw capability should be removed if not explicitly required, as it can give an attacker with access to a container the ability to create spoofed network traffic.
+- Tampering: Docker provides a TLS CA certificate file to allow secure communication between the Docker server and the client. This file should be protected from any tampering. It is used to authenticate the Docker server based on a given CA certificate. It must therefore be individually owned and group-owned by root to ensure that it cannot be modified by less privileged users to avoid tampering.
+- Denial of Service: By default, a container can use all of the memory on the host. You can use memory limit mechanisms to prevent a denial of service from occurring, where one container consumes all of the host’s resources and other containers on the same host are therefore not able to function. Denial of Service protection could result in exhausting resources needed to provide the service and lead to an outage.
+
+Kubernetes Threat Modeling
+Given Kubernetes' system components and the STRIDE framework, identify five potential threats that may arise.
+
+Docker-bench Run Results and Analysis
+From the failed findings, select and document 3 findings from the Docker-bench results that you want to harden based on the 5 attack surface areas you identified in Step 1. At least 1 of the 3 hardened findings should be different from the ones mentioned in the exercise (i.e. 5.10, 5.14, and 5.22).
